@@ -5,5 +5,8 @@ import dataValidation from "./modules/dataValidation"
 export default defineNuxtConfig({
     modules: [
         dataValidation
-    ]
+    ],
+    runtimeConfig: {
+        GITHUB_TOKEN: String(process.env.GITHUB_TOKEN)
+    }
 })

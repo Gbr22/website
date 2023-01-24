@@ -13,5 +13,6 @@
     "appShowcase":{
         "sortIndex":2,
         "image":"2.jpg"
-    }
+    },
+    "showReleases": true
 }

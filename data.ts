@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { LocalizedTextSchema } from './localization';
 import { readdir, lstat, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
+import { getLanguageStats, getReleases, getRepoInfo, LanguageStats, Release, RepoInfo } from './github';
 
 const PROJECTS_DIR = "./public/data/projects/";
 
@@ -31,7 +32,8 @@ let InfoSchema = z.object({
         showBorder: true
     }),
     appShowcase: z.optional(AppShowcaseSchema),
-    downloadCount: z.optional(z.number())
+    downloadCount: z.optional(z.number()),
+    showReleases: z.optional(z.boolean()).default(false)
 })
 
 export async function getProjectConfigs(){
@@ -64,25 +66,61 @@ export async function getShowcasedApps() {
 
     let showcaseList = projects.filter((project)=>isAppShowcase(project.appShowcase)) as ProjectWithShowcase[];
     
-    return showcaseList
-        .sort((a,b)=>{
-            return a.appShowcase.sortIndex - b.appShowcase.sortIndex;
-        })
-        .map(project=>{
-            return {
-                id: project.id,
-                icon: project.icon,
-                title: project.title,
-                image: project.appShowcase.image,
-                downloadCount: project.downloadCount || 0
-            }
-        });
+    let promises = showcaseList
+    .sort((a,b)=>{
+        return a.appShowcase.sortIndex - b.appShowcase.sortIndex;
+    })
+    .map(async project=>{
+        let downloadCount = project.downloadCount || 0;
+
+        if (project.github){
+            let releaseData = await getReleases(project.github.name);
+            downloadCount += releaseData.downloadCount;
+        }
+
+        return {
+            id: project.id,
+            icon: project.icon,
+            title: project.title,
+            image: project.appShowcase.image,
+            downloadCount
+        }
+    });
+
+    return Promise.all(promises);
 }
 
 export async function getProjectData(id: string) {
-    let config = getProjectConfig(id);
-    // TODO fetch github data
-    return config;
+    let config = await getProjectConfig(id);
+    if (!config){
+        return;
+    }
+    let downloadCount = config.downloadCount;
+
+    let releases: Release[] | undefined;
+    let languageStats: LanguageStats | undefined;
+    let repoInfo: RepoInfo | undefined;
+    
+    if (config.github){
+        languageStats = await getLanguageStats(config.github.name);
+        repoInfo = await getRepoInfo(config.github.name);
+
+        if (config.showReleases){
+            let releaseData = await getReleases(config.github.name);
+            if (!downloadCount){
+                downloadCount = 0;
+            }
+            downloadCount += releaseData.downloadCount;
+            releases = releaseData.releases;
+        }
+    }
+    return {
+        ...config,
+        ...repoInfo,
+        downloadCount,
+        releases,
+        languageStats,
+    };
 }
 
 export async function getProjectConfig(id: string) {
@@ -149,7 +187,8 @@ export async function getProjectConfig(id: string) {
         github:info.github,
         images,
         appShowcase: appShowcase,
-        downloadCount: info.downloadCount
+        downloadCount: info.downloadCount,
+        showReleases:info.showReleases
     }
 }
 

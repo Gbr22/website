@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useShowcasedApps } from '~~/api';
 import { localize } from '~~/localization';
 
 let { data: showCase, error } = await useShowcasedApps();
