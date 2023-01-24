@@ -1,29 +1,11 @@
 <script setup lang="ts">
-import { localize } from '~~/localization';
-
-let { data: showCase, error } = await useShowcasedApps();
-
-let downloadCount = computed(()=>{
-    if(!showCase.value){
-        return NaN;
-    }
-    return showCase.value.reduce((accumulator,e)=>accumulator+e.downloadCount, 0)
-})
+import AppShowcase from '~~/components/homePage/AppShowcase.vue';
 </script>
 
 <template>
-    <div>{{ localize({hu:"Kriskó Gábor",en:"Gábor Kriskó"}) }}</div>
-    <div>
-        <NuxtLink to="projects">projects</NuxtLink>
-    </div>
-    <h2>Showcase</h2>
-    <template v-if="showCase">
-        <p>{{ downloadCount }}</p>
-        <div v-for="app in showCase">
-            <NuxtLink :to="'/project/'+app.id">{{ localize(app.title) }}</NuxtLink>
-            <img :src="app.image" height="200" />
-        </div>
-    </template>
+    <HomePageHero></HomePageHero>
+    <Nav :is-homepage="true"></Nav>
+    <AppShowcase></AppShowcase>
 </template>
 
 <style scoped lang="scss">

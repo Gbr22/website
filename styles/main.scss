@@ -1,0 +1,46 @@
+@import '~~/styles/base.scss';
+@import '~~/styles/variables.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modak:wght@400&display=block&text=KriskóGábor');
+
+html, body {
+    color-scheme: dark;
+    background-color: #19191E;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+::selection {
+    color: black;
+    background-color: #0eeec9;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    ::-webkit-scrollbar {
+        width: 16px;
+        height: 16px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #8a8a8a;
+        background-clip: padding-box;
+        border: 4px solid transparent;
+        border-radius: 8px;
+        box-shadow: none;
+        min-height: 50px;
+        transition: all 0.5s ease;
+    }
+    ::-webkit-scrollbar-button {
+        width: 4px;
+        height: 4px;
+        background: none;
+        border: none;
+    }
+    ::-webkit-scrollbar-track {
+        background: none;
+        border: none;
+    }
+    ::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+}

@@ -1,0 +1,8 @@
+@mixin homepage-header {
+    font-size: clamp(30px,3vw,45px);
+    font-weight: 700;
+
+    @media screen and (max-width: 800px){
+        font-size: clamp(20px,6vw,45px);
+    }
+}

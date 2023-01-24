@@ -1,20 +1,20 @@
 import { z } from 'zod';
-import { LocalizedTextSchema } from './localization';
+import { LocalizedText, LocalizedTextSchema } from './localization';
 import { readdir, lstat, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import { getLanguageStats, getReleases, getRepoInfo, LanguageStats, Release, RepoInfo } from './github';
 
 const PROJECTS_DIR = "./public/data/projects/";
 
-let AppShowcaseSchema = z.object({
+let AppShowcaseDefinitionSchema = z.object({
     sortIndex: z.number(),
     image: z.string()
 });
 
-type AppShowcase = z.output<typeof AppShowcaseSchema>
+type AppShowcaseDefinition = z.output<typeof AppShowcaseDefinitionSchema>
 
-function isAppShowcase(obj: any): obj is AppShowcase {
-    let result = AppShowcaseSchema.safeParse(obj);
+function isAppShowcaseDefinition(obj: any): obj is AppShowcaseDefinition {
+    let result = AppShowcaseDefinitionSchema.safeParse(obj);
     return result.success;
 }
 
@@ -31,7 +31,7 @@ let InfoSchema = z.object({
     })).default({
         showBorder: true
     }),
-    appShowcase: z.optional(AppShowcaseSchema),
+    appShowcase: z.optional(AppShowcaseDefinitionSchema),
     downloadCount: z.optional(z.number()),
     showReleases: z.optional(z.boolean()).default(false)
 })
@@ -57,14 +57,28 @@ export async function getProjects(){
         }
     })
 }
-export async function getShowcasedApps() {
+
+interface Icon {
+    showBorder: boolean
+    src: string
+}
+
+export interface ShowcasedApp {
+    id: string
+    icon: Icon
+    title: LocalizedText
+    image: string
+    downloadCount: number
+}
+
+export async function getShowcasedApps(): Promise<ShowcasedApp[]> {
     let projects = await getProjectConfigs();
 
     interface ProjectWithShowcase extends ProjectConfig {
-        appShowcase: AppShowcase
+        appShowcase: AppShowcaseDefinition
     }
 
-    let showcaseList = projects.filter((project)=>isAppShowcase(project.appShowcase)) as ProjectWithShowcase[];
+    let showcaseList = projects.filter((project)=>isAppShowcaseDefinition(project.appShowcase)) as ProjectWithShowcase[];
     
     let promises = showcaseList
     .sort((a,b)=>{
