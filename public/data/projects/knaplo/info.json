@@ -1,0 +1,18 @@
+{
+    "title":"K napló",
+    "description":{
+        "en":"Unofficial Kréta webapp",
+        "hu":"Nem hivatalos Kréta webapp"
+    },
+    "actions":{
+        "open":"https://naplo.kess.hu"
+    },
+    "github":{
+        "name":"Gbr22/knaplo"
+    },
+    "downloadCount":895,
+    "appShowcase":{
+        "sortIndex":3,
+        "image":"3.jpg"
+    }
+}

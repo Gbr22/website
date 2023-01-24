@@ -1,0 +1,23 @@
+{
+    "title":{
+        "hu":"2.5D renderelő",
+        "en":"2.5D renderer"
+    },
+    "description":{
+        "en":"A raycasting based rendering engine that renders in 'fake' 3D.",
+        "hu":"Egy sugárvetés alapú renderelő amely 'hamis' 3D-ben renderel."
+    },
+    "longDescription":{
+        "en":"A raycasting based rendering engine that renders in 'fake' 3D. It even supports transparency!",
+        "hu":"Egy sugárvetés alapú renderelő amely 'hamis' 3D-ben renderel. Átlátszóságot is támogat."
+    },
+    "actions":{
+        "open":"https://renderer.kess.hu"
+    },
+    "iframe":{
+        "src":"https://renderer.kess.hu"
+    },
+    "github":{
+        "name":"Gbr22/2.5engine"
+    }
+}

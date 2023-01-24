@@ -1,0 +1,13 @@
+{
+    "title":"Kalk",
+    "description":{
+        "en":"Calculator webapp, that supports functions and vectors too",
+        "hu":"Számológép webapp, ami támogat függvényeket és vektorokat is"
+    },
+    "actions":{
+        "open":"https://kalk.kess.hu"
+    },
+    "github":{
+        "name":"Gbr22/kalk"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "title":"Dime",
+    "description":{
+        "en": "Compiled programming language.",
+        "hu": "Compile-olt programozási nyelv."
+    },
+    "longDescription":{
+        "en": "Compiled programming language. Compiles to LLVM IR.",
+        "hu": "Compile-olt programozási nyelv. LLVM IR-re fordul."
+    },
+    "actions":{
+        "website":"http://dimelang.tk"
+    },
+    "iframe":"https://lang.kess.hu",
+    "github":{
+        "name":"Gbr22/dimelang"
+    }
+}

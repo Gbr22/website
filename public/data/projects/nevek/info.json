@@ -1,0 +1,22 @@
+{
+    "title":{
+        "en":"Hungarian names",
+        "hu":"Anyakönyvezhető nevek"
+    },
+    "description":{
+        "en":"A website where you can check what forenames can be given to children born in Hungary",
+        "hu":"Egy oldal ahol a magyarországon anyakönyvezhető neveket lehet ellenőrizni"
+    },
+    "actions":{
+        "website":"https://nevek.netlify.app"
+    },
+    "iframe":{
+        "src":"https://nevek.netlify.app"
+    },
+    "github":{
+        "name":"Gbr22/nevek"
+    },
+    "icon":{
+        "border":false
+    }
+}

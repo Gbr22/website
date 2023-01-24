@@ -1,0 +1,17 @@
+{
+    "title":"Sorozatbarát app",
+    "description":{
+        "en":"Unofficial Sorozatbarát app, for ad-free content consumption.",
+        "hu":"Nem hivatalos Sorozatbarát app, reklámmentes sorozat élményhez."
+    },
+    "actions":{
+        "download":"https://github.com/Gbr22/sorozatbarat/releases/latest/download/app-release.apk"
+    },
+    "github":{
+        "name":"Gbr22/sorozatbarat"
+    },
+    "appShowcase":{
+        "sortIndex":2,
+        "image":"2.jpg"
+    }
+}

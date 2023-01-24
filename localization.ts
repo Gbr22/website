@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export const SupportedLanguages = ["hu","en"] as const;
 const DEFAULT_LANGUAGE = "en";
 export type LanguageCode = typeof SupportedLanguages[number];
@@ -5,6 +7,16 @@ export type LocalizationMap = {
     [key in LanguageCode]: string;
 };
 export type LocalizedText = string | LocalizationMap;
+
+function createLocalizedTextSchema(){
+    type LocalizationMapSchema = {
+        [key in LanguageCode]: z.ZodString;
+    };
+    let obj: LocalizationMapSchema = Object.assign({},...SupportedLanguages.map(lang=>({[lang]:z.string()})));
+    return z.string().or(z.object(obj));
+}
+
+export const LocalizedTextSchema = createLocalizedTextSchema();
 
 export function isValidLanguageCode(code: any): code is LanguageCode {
     return SupportedLanguages.includes(code);
@@ -30,7 +42,7 @@ export function getCurrentLanguage(): LanguageCode {
     let headers = useRequestHeaders(["accept-language"]);
     let acceptLanguage = headers["accept-language"];
     let languagePreferenceList: LanguageCode[] = [];
-    
+
     if (acceptLanguage){
         let languages = acceptLanguage
             .split(",")

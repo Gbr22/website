@@ -1,0 +1,19 @@
+{
+    "title":{
+        "en":"Veszprém Zoo",
+        "hu":"Veszprém Állatkert"
+    },
+    "description":{
+        "en":"A game in which you have to identify animals based on the sounds they make",
+        "hu":"Egy játék, amiben az állatokat a hangjuk alapján kell beazonosítani"
+    },
+    "actions":{
+        "open":"https://veszprem-allatkert.kess.hu"
+    },
+    "iframe":{
+        "url":"https://veszprem-allatkert.kess.hu"
+    },
+    "github":{
+        "name":"Gbr22/veszprem-allatkert"
+    }
+}

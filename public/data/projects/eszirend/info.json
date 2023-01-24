@@ -1,0 +1,18 @@
+{
+    "title":"ESZIrend",
+    "description":{
+        "en":"Mobile friendly timetable webapp for eszi",
+        "hu":"Mobilbarát órarend webapp az eszinek"
+    },
+    "actions":{
+        "open":"https://eszirend.kess.hu",
+        "googleplay":"https://market.android.com/details?id=gbr22.eszirend"
+    },
+    "github":{
+        "name":"Gbr22/eszirend2"
+    },
+    "appShowcase":{
+        "sortIndex":1,
+        "image":"2.jpg"
+    }
+}
