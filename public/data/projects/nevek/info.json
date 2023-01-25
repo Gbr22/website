@@ -8,10 +8,10 @@
         "hu":"Egy oldal ahol a magyarországon anyakönyvezhető neveket lehet ellenőrizni"
     },
     "actions":{
-        "website":"https://nevek.netlify.app"
+        "website":"https://nevek.kess.hu"
     },
     "embed":{
-        "src":"https://nevek.netlify.app",
+        "src":"https://nevek.kess.hu",
         "minHeight": 55
     },
     "github":{

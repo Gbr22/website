@@ -77,56 +77,58 @@ function formatPercentage(n: number){
         </div>
         <div class="card stats">
             <div class="inner">
-                <div class="row" v-if="project.showReleases">
-                    <span class="text">{{ localize({ hu: "Letöltések", en: "Downloads" }) }}</span>
-                    <span class="number">
-                        {{ project.downloadCount }}
-                    </span>
+                <div class="rows">
+                    <div class="row" v-if="project.showReleases">
+                        <span class="text">{{ localize({ hu: "Letöltések", en: "Downloads" }) }}</span>
+                        <span class="number">
+                            {{ project.downloadCount }}
+                        </span>
+                    </div>
+                    <a
+                        class="row"
+                        :href="'https://github.com/'+project.github.name+'/stargazers'"
+                    >
+                        <span class="text">
+                            {{ localize({ hu: "Csillagok", en: "Stars" }) }}
+                        </span>
+                        <span class="number">
+                            {{ project.starsCount }}
+                        </span>
+                    </a>
+                    <a
+                        class="row"
+                        :href="'https://github.com/'+project.github.name+'/watchers'"
+                    >
+                        <span class="text">
+                            {{ localize({ hu: "Figyelők", en: "Watchers" }) }}
+                        </span>
+                        <span class="number">
+                            {{ project.watchersCount }}
+                        </span>
+                    </a>
+                    <a
+                        class="row"
+                        :href="'https://github.com/'+project.github.name+'/issues?q=is%3Aopen'"
+                    >
+                        <span class="text">
+                            {{ localize({ hu: "Ügyek", en: "Issues" }) }}
+                        </span>
+                        <span class="number">
+                            {{ project.openIssuesCount }}
+                        </span>
+                    </a>
+                    <a
+                        class="row"
+                        :href="'https://github.com/'+project.github.name+'/network/members'"
+                    >
+                        <span class="text">
+                            {{ localize({ hu: "Forkok", en: "Forks" }) }}
+                        </span>
+                        <span class="number">
+                            {{ project.forksCount }}
+                        </span>
+                    </a>
                 </div>
-                <a
-                    class="row"
-                    :href="'https://github.com/'+project.github.name+'/stargazers'"
-                >
-                    <span class="text">
-                        {{ localize({ hu: "Csillagok", en: "Stars" }) }}
-                    </span>
-                    <span class="number">
-                        {{ project.starsCount }}
-                    </span>
-                </a>
-                <a
-                    class="row"
-                    :href="'https://github.com/'+project.github.name+'/watchers'"
-                >
-                    <span class="text">
-                        {{ localize({ hu: "Figyelők", en: "Watchers" }) }}
-                    </span>
-                    <span class="number">
-                        {{ project.watchersCount }}
-                    </span>
-                </a>
-                <a
-                    class="row"
-                    :href="'https://github.com/'+project.github.name+'/issues?q=is%3Aopen'"
-                >
-                    <span class="text">
-                        {{ localize({ hu: "Ügyek", en: "Issues" }) }}
-                    </span>
-                    <span class="number">
-                        {{ project.openIssuesCount }}
-                    </span>
-                </a>
-                <a
-                    class="row"
-                    :href="'https://github.com/'+project.github.name+'/network/members'"
-                >
-                    <span class="text">
-                        {{ localize({ hu: "Forkok", en: "Forks" }) }}
-                    </span>
-                    <span class="number">
-                        {{ project.forksCount }}
-                    </span>
-                </a>
             </div>
         </div>
         <div class="card languages">
@@ -186,17 +188,16 @@ function formatPercentage(n: number){
         grid-area: stats;
         flex: 1;
 
-        .row {
-            display: flex;
-            gap: 15px;
-
-            .text {
-                flex: 1;
+        .rows {
+            .row {
+                display: flex;
+                justify-content: space-between;
+                gap: 15px;
             }
-        }
 
-        a:hover {
-            color: #09caaa;
+            a:hover {
+                color: #09caaa;
+            }
         }
     }
     .languages {
@@ -273,6 +274,22 @@ function formatPercentage(n: number){
         grid-template-areas:
         "repo stats"
         "languages languages";
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+
+        .stats {
+            .rows {
+                margin: auto;
+                width: min-content;
+                .row {
+                    gap: 20vw;
+                }
+            }
+        }
     }
 }
 </style>

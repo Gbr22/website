@@ -5,7 +5,7 @@
         "hu":"Nem hivatalos Sorozatbarát app, reklámmentes sorozat élményhez."
     },
     "actions":{
-        "directDownload":"https://github.com/Gbr22/sorozatbarat/releases/latest/download/app-release.apk"
+        "directDownload":"https://downloads.sorozatbarat.kess.hu/latest/app-release.apk"
     },
     "github":{
         "name":"Gbr22/sorozatbarat"
