@@ -14,5 +14,6 @@
     "appShowcase":{
         "sortIndex":3,
         "image":"3.jpg"
-    }
+    },
+    "sortIndex": 6
 }

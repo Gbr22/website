@@ -46,11 +46,11 @@ let links = [
 @import '~~/styles/homepage.scss';
 
 nav.isHomepage {
-    position: sticky;
-    top: 0;
     margin-top: -120px;
 }
 nav {
+    position: sticky;
+    top: 0;
     z-index: 900;
     width: 100%;
     display: grid;
@@ -60,7 +60,7 @@ nav {
         background-color: rgba(51, 51, 61, 0.9);
         border-radius: 20px;
         padding: 0 20px;
-        margin: 10px 0;
+        margin-top: 10px;
 
         @supports (backdrop-filter: blur(15px)){
             background-color: rgba(51, 51, 61, 0.65);

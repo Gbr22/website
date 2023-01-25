@@ -18,7 +18,7 @@ function isAppShowcaseDefinition(obj: any): obj is AppShowcaseDefinition {
     return result.success;
 }
 
-let InfoSchema = z.object({
+let ProjectInfoSchema = z.object({
     title: LocalizedTextSchema,
     description: LocalizedTextSchema,
     longDescription: z.optional(LocalizedTextSchema),
@@ -33,7 +33,8 @@ let InfoSchema = z.object({
     }),
     appShowcase: z.optional(AppShowcaseDefinitionSchema),
     downloadCount: z.optional(z.number()),
-    showReleases: z.optional(z.boolean()).default(false)
+    showReleases: z.optional(z.boolean()).default(false),
+    sortIndex: z.optional(z.number()).default(Infinity)
 })
 
 export async function getProjectConfigs(){
@@ -43,19 +44,28 @@ export async function getProjectConfigs(){
     return projects;
 }
 
-export async function getProjects(){
+export interface Project {
+    id: string
+    title: LocalizedText
+    description: LocalizedText,
+    icon: Icon
+}
+
+export async function getProjects(): Promise<Project[]> {
     let projects = await getProjectConfigs();
 
-    // only return relevant fields
-
-    return projects.map(project=>{
-        return {
-            id: project.id,
-            title: project.title,
-            description: project.description,
-            icon: project.icon
-        }
-    })
+    return projects
+        .sort((a,b)=>{
+            return a.sortIndex - b.sortIndex;
+        })
+        .map(project=>{ // only return relevant fields
+            return {
+                id: project.id,
+                title: project.title,
+                description: project.description,
+                icon: project.icon
+            }
+        })
 }
 
 interface Icon {
@@ -168,7 +178,7 @@ export async function getProjectConfig(id: string) {
     }
 
     let infoUnsafe = JSON.parse(String(await readFile(dir+"info.json")));
-    let info = InfoSchema.parse(infoUnsafe);
+    let info = ProjectInfoSchema.parse(infoUnsafe);
 
     let icon = findFile("icon");
     if (!icon){
@@ -202,7 +212,8 @@ export async function getProjectConfig(id: string) {
         images,
         appShowcase: appShowcase,
         downloadCount: info.downloadCount,
-        showReleases:info.showReleases
+        showReleases:info.showReleases,
+        sortIndex:info.sortIndex
     }
 }
 

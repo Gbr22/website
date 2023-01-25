@@ -15,5 +15,6 @@
     },
     "icon":{
         "border":false
-    }
+    },
+    "sortIndex":5
 }
