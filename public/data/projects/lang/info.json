@@ -11,7 +11,10 @@
     "actions":{
         "website":"http://dimelang.tk"
     },
-    "iframe":"https://lang.kess.hu",
+    "embed":{
+        "src":"https://lang.kess.hu",
+        "minHeight":50
+    },
     "github":{
         "name":"Gbr22/dimelang"
     }

@@ -31,10 +31,15 @@ let ProjectInfoSchema = z.object({
     })).default({
         showBorder: true
     }),
+    actions: z.optional(z.record(z.string(),z.string())).default({}),
     appShowcase: z.optional(AppShowcaseDefinitionSchema),
     downloadCount: z.optional(z.number()),
     showReleases: z.optional(z.boolean()).default(false),
-    sortIndex: z.optional(z.number()).default(Infinity)
+    sortIndex: z.optional(z.number()).default(Infinity),
+    embed: z.optional(z.object({
+        src: z.string(),
+        minHeight: z.optional(z.number())
+    }))
 })
 
 export async function getProjectConfigs(){
@@ -147,6 +152,8 @@ export async function getProjectData(id: string) {
     };
 }
 
+export type ProjectData = NonNullable<Awaited<ReturnType<typeof getProjectData>>>
+
 export async function getProjectConfig(id: string) {
     let dir = `${PROJECTS_DIR}${id}/`;
     if (!existsSync(dir)){
@@ -193,27 +200,19 @@ export async function getProjectConfig(id: string) {
         images = (await readdir(dir+"images")).map(e=>`/data/projects/${id}/images/${e}`)
     }
 
-    let appShowcase = info.appShowcase;
 
-    if (appShowcase){
-        appShowcase.image = `/data/projects/${id}/images/${appShowcase.image}`;
+    if (info.appShowcase){
+        info.appShowcase.image = `/data/projects/${id}/images/${info.appShowcase.image}`;
     }
 
     return {
+        ...info,
         id,
-        title:info.title,
-        description:info.description,
-        longDescription:info.longDescription,
         icon:{
             showBorder:info.icon.showBorder,
             src:`/data/projects/${id}/${icon.fullname}`
         },
-        github:info.github,
         images,
-        appShowcase: appShowcase,
-        downloadCount: info.downloadCount,
-        showReleases:info.showReleases,
-        sortIndex:info.sortIndex
     }
 }
 

@@ -10,8 +10,9 @@
     "actions":{
         "open":"https://veszprem-allatkert.kess.hu"
     },
-    "iframe":{
-        "url":"https://veszprem-allatkert.kess.hu"
+    "embed":{
+        "src":"https://veszprem-allatkert.kess.hu",
+        "minHeight": 75
     },
     "github":{
         "name":"Gbr22/veszprem-allatkert"

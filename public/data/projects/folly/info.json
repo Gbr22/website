@@ -7,14 +7,14 @@
     "actions":{
         "open":"https://folly.kess.hu"
     },
-    "iframe":{
-        "url":"https://folly.kess.hu"
+    "embed":{
+        "src":"https://folly.kess.hu"
     },
     "github":{
         "name":"Gbr22/folly"
     },
     "icon":{
-        "border":false
+        "showBorder":false
     },
     "sortIndex":5
 }

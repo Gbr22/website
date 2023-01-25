@@ -10,14 +10,15 @@
     "actions":{
         "website":"https://nevek.netlify.app"
     },
-    "iframe":{
-        "src":"https://nevek.netlify.app"
+    "embed":{
+        "src":"https://nevek.netlify.app",
+        "minHeight": 55
     },
     "github":{
         "name":"Gbr22/nevek"
     },
     "icon":{
-        "border":false
+        "showBorder":false
     },
     "sortIndex":3
 }

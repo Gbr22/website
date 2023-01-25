@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { localize } from '~~/localization';
+import { localize } from '../localization';
+import { useProjects } from '../composables/useData';
 let {data: projects, error} = await useProjects();
 
 useHead({

@@ -14,8 +14,9 @@
     "actions":{
         "open":"https://renderer.kess.hu"
     },
-    "iframe":{
-        "src":"https://renderer.kess.hu"
+    "embed":{
+        "src":"https://renderer.kess.hu",
+        "minHeight":30
     },
     "github":{
         "name":"Gbr22/2.5engine"

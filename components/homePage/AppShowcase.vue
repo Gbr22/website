@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { localize } from '~~/localization';
+import { localize } from '../../localization';
 import AppShowcaseItem from './AppShowcaseItem.vue';
+import { useShowcasedApps } from '../../composables/useData';
 let { data: showCase, error } = await useShowcasedApps();
 
 let downloadCount = computed(()=>{
