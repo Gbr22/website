@@ -31,6 +31,10 @@ useHead({
     link: [{
         rel: "icon",
         href: project.icon.src,
+    }],
+    meta: [{
+        name: "description",
+        content: localize(project.description)
     }]
 })
 
