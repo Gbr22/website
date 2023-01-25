@@ -48,7 +48,7 @@ let links = [
 nav.isHomepage {
     position: sticky;
     top: 0;
-    margin-top: -100px;
+    margin-top: -120px;
 }
 nav {
     z-index: 900;
@@ -60,7 +60,7 @@ nav {
         background-color: rgba(51, 51, 61, 0.9);
         border-radius: 20px;
         padding: 0 20px;
-        margin-top: 10px;
+        margin: 10px 0;
 
         @supports (backdrop-filter: blur(15px)){
             background-color: rgba(51, 51, 61, 0.65);

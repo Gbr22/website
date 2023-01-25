@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { localize } from '~~/localization';
-
-
 </script>
 
 <template>
@@ -19,8 +17,6 @@ import { localize } from '~~/localization';
         height: 100vh; // desktop fallback
     }
     height: 100svh;
-
-    
 
     display: grid;
     place-content: center;

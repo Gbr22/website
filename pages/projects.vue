@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { localize } from '~~/localization';
 let {data: projects, error} = await useProjects();
+
+useHead({
+    title: localize({hu:"Projektek",en:"Projects"}),
+    link: [{
+        rel: "icon",
+        href: "/favicon.svg",
+        type: "image/svg+xml"
+    }]
+})
 </script>
 
 <template>
