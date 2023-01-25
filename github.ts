@@ -127,7 +127,8 @@ let RepoInfoSchema = z.object({
     forks_count: z.number(),
     license: z.object({
         spdx_id: z.string(),
-    }).or(z.null())
+    }).or(z.null()),
+    private: z.boolean()
 })
 
 interface License {
@@ -140,6 +141,7 @@ export interface RepoInfo {
     openIssuesCount: number
     forksCount: number
     license: License | undefined
+    isPrivate: boolean
 }
 
 export async function getRepoInfo(name: string): Promise<RepoInfo> {
@@ -159,7 +161,8 @@ export async function getRepoInfo(name: string): Promise<RepoInfo> {
         watchersCount: repoInfo.subscribers_count,
         openIssuesCount: repoInfo.open_issues_count,
         forksCount: repoInfo.forks_count,
-        license
+        license,
+        isPrivate: repoInfo.private,
     }
 }
 

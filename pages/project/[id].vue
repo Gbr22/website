@@ -3,6 +3,7 @@ import { localize } from '../../localization';
 import Head from '../../components/projectPage/Head.vue';
 import Embed from '../../components/projectPage/Embed.vue';
 import Gallery from '../../components/projectPage/Gallery.vue';
+import GitInfo from '../../components/projectPage/GitInfo.vue';
 import { useCurrentProject } from '../../composables/useData';
 let { data, error } = await useCurrentProject();
 
@@ -40,6 +41,7 @@ useHead({
         <Head></Head>
         <Embed></Embed>
         <Gallery></Gallery>
+        <GitInfo></GitInfo>
     </div>
 </template>
 
