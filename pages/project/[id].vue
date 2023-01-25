@@ -2,6 +2,7 @@
 import { localize } from '../../localization';
 import Head from '../../components/projectPage/Head.vue';
 import Embed from '../../components/projectPage/Embed.vue';
+import Gallery from '../../components/projectPage/Gallery.vue';
 import { useCurrentProject } from '../../composables/useData';
 let { data, error } = await useCurrentProject();
 
@@ -38,17 +39,15 @@ useHead({
         <Nav></Nav>
         <Head></Head>
         <Embed></Embed>
+        <Gallery></Gallery>
     </div>
 </template>
 
 <style scoped lang="scss">
 .project {
-    padding: var(--page-padding);
-    padding-top: 0;
+    padding-bottom: var(--page-padding);
 }
-
 @media screen and (max-width: 550px) {
-
     .project {
         --page-padding: 20px;
     }

@@ -80,6 +80,7 @@ projectActions[0].isPrimary = true;
 
 <style scoped lang="scss">
 .head {
+    padding: 0 var(--page-padding);
     margin-top: var(--section-spacing);
     display: grid;
     grid-template-columns: fit-content(100%) auto fit-content(100%);
