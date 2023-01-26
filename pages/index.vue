@@ -2,6 +2,7 @@
 import AppShowcase from '~~/components/homePage/AppShowcase.vue';
 import WebShowcase from '~~/components/homePage/WebShowcase.vue';
 import Contact from '~~/components/homePage/Contact.vue';
+import ScrollAnimation from '~~/components/homePage/ScrollAnimation.vue';
 import { localize } from '~~/localization';
 
 useHead({
@@ -17,6 +18,7 @@ useHead({
 <template>
     <HomePageHero></HomePageHero>
     <Nav :is-homepage="true"></Nav>
+    <ScrollAnimation></ScrollAnimation>
     <AppShowcase></AppShowcase>
     <WebShowcase></WebShowcase>
     <Contact></Contact>

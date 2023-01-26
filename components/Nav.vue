@@ -46,7 +46,7 @@ let links = [
 @import '~~/styles/homepage.scss';
 
 nav.isHomepage {
-    margin-top: -120px;
+    margin-top: -128px;
 }
 nav {
     position: sticky;

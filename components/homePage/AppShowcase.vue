@@ -56,8 +56,7 @@ let downloadCount = computed(()=>{
 @import '~~/styles/homepage.scss';
 
 .showcase {
-    margin-top: 30px;
-    padding: 10vh var(--page-padding);
+    padding: var(--section-spacing) var(--page-padding);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -106,9 +105,8 @@ let downloadCount = computed(()=>{
 @media screen and (max-width: 1000px) {
     .showcase {
         padding-bottom: 0;
-        padding-top: var(--page-padding);
         flex-direction: column;
-        margin-top: 0;
+        gap: calc(var(--section-spacing) + 40px);
         .left {
             flex-direction: row;
     
@@ -140,7 +138,6 @@ let downloadCount = computed(()=>{
     .showcase {
         padding: 0;
         padding-top: var(--page-padding);
-        margin-top: 30px;
 
         .left {
             padding: 0 var(--page-padding);

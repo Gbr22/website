@@ -34,6 +34,7 @@ import WebShowcaseItem from './WebShowcaseItem.vue';
     position: relative;
     justify-content: space-between;
     padding: 0 var(--page-padding);
+    margin-top:var(--section-spacing);
 
     .caption {
         box-sizing: content-box;
@@ -67,7 +68,6 @@ import WebShowcaseItem from './WebShowcaseItem.vue';
 }
 @media screen and (max-width: 1000px) {
     .showcase {
-        margin-top:var(--section-spacing);
         gap: var(--section-spacing);
         flex-direction: column;
 
