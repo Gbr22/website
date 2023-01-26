@@ -4,6 +4,13 @@ import AppShowcaseItem from './AppShowcaseItem.vue';
 import { useShowcasedApps } from '../../composables/useData';
 let { data: showCase, error } = await useShowcasedApps();
 
+if (!showCase.value || error.value){
+    throw createError({ statusCode: 500, statusMessage: localize({
+        hu: "Ismeretlen hiba történt",
+        en: "An unknown error occurred"
+    }) })
+}
+
 let downloadCount = computed(()=>{
     if(!showCase.value){
         return NaN;
