@@ -3,30 +3,45 @@ import { z } from 'zod';
 export const SupportedLanguages = ["hu","en"] as const;
 const DEFAULT_LANGUAGE = "en";
 export type LanguageCode = typeof SupportedLanguages[number];
+
+/**
+ * Represents a snippet of multilingual data
+ * eg: { hu: "Szöveg", en: "Text" }
+ */
 export type LocalizationMap = {
     [key in LanguageCode]: string;
 };
+
+/**
+ * Represents a snippet of data that can be the same in all languages (string)
+ * or is translated to multiple languages (LocalizationMap)
+ */
 export type LocalizedText = string | LocalizationMap;
 
-function createLocalizedTextSchema(){
-    type LocalizationMapSchema = {
+function createLocalizationMapSchema(){
+    let objectSignature = {} as {
         [key in LanguageCode]: z.ZodString;
     };
-    let obj: LocalizationMapSchema = Object.assign({},...SupportedLanguages.map(lang=>({[lang]:z.string()})));
-    return z.string().or(z.object(obj));
+    SupportedLanguages.forEach(langCode=>{
+        objectSignature[langCode] = z.string();
+    })
+    return z.object(objectSignature);
 }
 
-export const LocalizedTextSchema = createLocalizedTextSchema();
+let LocalizationMapSchema = createLocalizationMapSchema();
+
+export const LocalizedTextSchema = z.string().or(LocalizationMapSchema);
 
 export function isValidLanguageCode(code: any): code is LanguageCode {
     return SupportedLanguages.includes(code);
 }
-
-function normalizeLanguageCode(code: string): LanguageCode | undefined {
-    // "hu" -> "hu"
-    // "hu-HU" -> "hu"
-    // "es-ES" -> undefined
-    
+/**
+ * hu -> hu;
+ * en-US -> en;
+ * en-GB -> en;
+ * es-ES -> undefined;
+ */
+function normalizeLanguageCode(code: string): LanguageCode | undefined {    
     if (isValidLanguageCode(code)){
         return code;
     }

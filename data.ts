@@ -42,28 +42,36 @@ let ProjectInfoSchema = z.object({
     }))
 })
 
+/**
+ * Represents the contents of an info.json file
+ */
+type ProjectInfo = z.infer<typeof ProjectInfoSchema>
+
 export async function getProjectConfigs(){
     let contents = await readdir(PROJECTS_DIR);
     let promises = contents.map(e=>getProjectConfig(e));
     let projects = (await Promise.all(promises)).filter(e=>e != undefined) as ProjectConfig[];
     return projects;
 }
-
-export interface Project {
+          
+/**
+ * Contains only the most important keys from ProjectConfig
+ */
+export interface ProjectSubset {
     id: string
     title: LocalizedText
     description: LocalizedText,
     icon: Icon
 }
 
-export async function getProjects(): Promise<Project[]> {
+export async function getProjects(): Promise<ProjectSubset[]> {
     let projects = await getProjectConfigs();
 
     return projects
         .sort((a,b)=>{
             return a.sortIndex - b.sortIndex;
         })
-        .map(project=>{ // only return relevant fields
+        .map(project=>{
             return {
                 id: project.id,
                 title: project.title,
@@ -119,13 +127,21 @@ export async function getShowcasedApps(): Promise<ShowcasedApp[]> {
     return Promise.all(promises);
 }
 
-export async function getProjectData(id: string) {
+/**
+ * Represents all available data about a project.
+ * 
+ * Local data (ProjectConfig) + data fetched from the internet
+ */
+export interface ProjectData extends ProjectConfig, Partial<RepoInfo> {
+    releases: Release[] | undefined
+    languageStats: LanguageStats | undefined
+} 
+
+export async function getProjectData(id: string): Promise<ProjectData | undefined> {
     let config = await getProjectConfig(id);
     if (!config){
         return;
     }
-    let downloadCount = config.downloadCount;
-
     let releases: Release[] | undefined;
     let languageStats: LanguageStats | undefined;
     let repoInfo: RepoInfo | undefined;
@@ -136,25 +152,33 @@ export async function getProjectData(id: string) {
 
         if (config.showReleases){
             let releaseData = await getReleases(config.github.name);
-            if (!downloadCount){
-                downloadCount = 0;
+            if (!config.downloadCount){
+                config.downloadCount = 0;
             }
-            downloadCount += releaseData.downloadCount;
+            config.downloadCount += releaseData.downloadCount;
             releases = releaseData.releases;
         }
     }
     return {
         ...config,
         ...repoInfo,
-        downloadCount,
         releases,
         languageStats,
     };
 }
+          
+/**
+ * Contains all of the local data about the project (found in '/public/data/*')
+ * 
+ * info.json & icon & images
+ */
+interface ProjectConfig extends ProjectInfo {
+    id: string
+    icon: Icon,
+    images: string[] | undefined
+}
 
-export type ProjectData = NonNullable<Awaited<ReturnType<typeof getProjectData>>>
-
-export async function getProjectConfig(id: string) {
+export async function getProjectConfig(id: string): Promise<ProjectConfig | undefined> {
     let dir = `${PROJECTS_DIR}${id}/`;
     if (!existsSync(dir)){
         return;
@@ -215,5 +239,3 @@ export async function getProjectConfig(id: string) {
         images,
     }
 }
-
-export type ProjectConfig = NonNullable<Awaited<ReturnType<typeof getProjectConfig>>>

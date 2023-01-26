@@ -170,7 +170,7 @@ let LanguageStatsSchema = z.record(z.string(), z.number());
 
 export type LanguageStats = z.infer<typeof LanguageStatsSchema>;
 
-export async function getLanguageStats(name: string) {
+export async function getLanguageStats(name: string): Promise<LanguageStats> {
     let object = await fetchGithub(`repos/${name}/languages`);
     let stats = LanguageStatsSchema.parse(object);
     return stats;
